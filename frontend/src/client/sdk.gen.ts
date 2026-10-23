@@ -2,7 +2,7 @@
 
 import { type Client, type Options as Options2, type TDataShape, urlSearchParamsBodySerializer } from './client';
 import { client } from './client.gen';
-import type { itemsCreateItemData, itemsCreateItemErrors, itemsCreateItemResponses, itemsDeleteItemData, itemsDeleteItemErrors, itemsDeleteItemResponses, itemsReadItemData, itemsReadItemErrors, itemsReadItemResponses, itemsReadItemsData, itemsReadItemsErrors, itemsReadItemsResponses, itemsUpdateItemData, itemsUpdateItemErrors, itemsUpdateItemResponses, loginLoginAccessTokenData, loginLoginAccessTokenErrors, loginLoginAccessTokenResponses, loginRecoverPasswordData, loginRecoverPasswordErrors, loginRecoverPasswordHtmlContentData, loginRecoverPasswordHtmlContentErrors, loginRecoverPasswordHtmlContentResponses, loginRecoverPasswordResponses, loginResetPasswordData, loginResetPasswordErrors, loginResetPasswordResponses, loginTestTokenData, loginTestTokenResponses, privateCreateUserData, privateCreateUserErrors, privateCreateUserResponses, usersCreateUserData, usersCreateUserErrors, usersCreateUserResponses, usersDeleteUserData, usersDeleteUserErrors, usersDeleteUserMeData, usersDeleteUserMeResponses, usersDeleteUserResponses, usersReadUserByIdData, usersReadUserByIdErrors, usersReadUserByIdResponses, usersReadUserMeData, usersReadUserMeResponses, usersReadUsersData, usersReadUsersErrors, usersReadUsersResponses, usersRegisterUserData, usersRegisterUserErrors, usersRegisterUserResponses, usersUpdatePasswordMeData, usersUpdatePasswordMeErrors, usersUpdatePasswordMeResponses, usersUpdateUserData, usersUpdateUserErrors, usersUpdateUserMeData, usersUpdateUserMeErrors, usersUpdateUserMeResponses, usersUpdateUserResponses, utilsHealthCheckData, utilsHealthCheckResponses, utilsTestEmailData, utilsTestEmailErrors, utilsTestEmailResponses } from './types.gen';
+import type { itemsCreateItemData, itemsCreateItemErrors, itemsCreateItemResponses, itemsDeleteItemData, itemsDeleteItemErrors, itemsDeleteItemResponses, itemsReadItemData, itemsReadItemErrors, itemsReadItemResponses, itemsReadItemsData, itemsReadItemsErrors, itemsReadItemsResponses, itemsUpdateItemData, itemsUpdateItemErrors, itemsUpdateItemResponses, loginLoginAccessTokenData, loginLoginAccessTokenErrors, loginLoginAccessTokenResponses, loginRecoverPasswordData, loginRecoverPasswordErrors, loginRecoverPasswordHtmlContentData, loginRecoverPasswordHtmlContentErrors, loginRecoverPasswordHtmlContentResponses, loginRecoverPasswordResponses, loginResetPasswordData, loginResetPasswordErrors, loginResetPasswordResponses, loginTestTokenData, loginTestTokenResponses, pmsAssignGoalsData, pmsAssignGoalsErrors, pmsAssignGoalsResponses, pmsCreateCampusData, pmsCreateCampusErrors, pmsCreateCampusResponses, pmsCreateCycleData, pmsCreateCycleErrors, pmsCreateCycleResponses, pmsCreateDesignationData, pmsCreateDesignationErrors, pmsCreateDesignationResponses, pmsCreateEmployeeData, pmsCreateEmployeeErrors, pmsCreateEmployeeResponses, pmsCreateKpiData, pmsCreateKpiErrors, pmsCreateKpiResponses, pmsCreateKraData, pmsCreateKraErrors, pmsCreateKraResponses, pmsCreateTemplateData, pmsCreateTemplateErrors, pmsCreateTemplateResponses, pmsPublishTemplateData, pmsPublishTemplateErrors, pmsPublishTemplateResponses, pmsSubmitGoalsData, pmsSubmitGoalsErrors, pmsSubmitGoalsResponses, pmsWorkspaceData, pmsWorkspaceResponses, privateCreateUserData, privateCreateUserErrors, privateCreateUserResponses, usersCreateUserData, usersCreateUserErrors, usersCreateUserResponses, usersDeleteUserData, usersDeleteUserErrors, usersDeleteUserMeData, usersDeleteUserMeResponses, usersDeleteUserResponses, usersReadUserByIdData, usersReadUserByIdErrors, usersReadUserByIdResponses, usersReadUserMeData, usersReadUserMeResponses, usersReadUsersData, usersReadUsersErrors, usersReadUsersResponses, usersRegisterUserData, usersRegisterUserErrors, usersRegisterUserResponses, usersUpdatePasswordMeData, usersUpdatePasswordMeErrors, usersUpdatePasswordMeResponses, usersUpdateUserData, usersUpdateUserErrors, usersUpdateUserMeData, usersUpdateUserMeErrors, usersUpdateUserMeResponses, usersUpdateUserResponses, utilsHealthCheckData, utilsHealthCheckResponses, utilsTestEmailData, utilsTestEmailErrors, utilsTestEmailResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -17,6 +17,168 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
      */
     meta?: Record<string, unknown>;
 };
+
+export class PmsService {
+    /**
+     * Workspace
+     */
+    public static workspace<ThrowOnError extends boolean = true>(options?: Options<pmsWorkspaceData, ThrowOnError>) {
+        return (options?.client ?? client).get<pmsWorkspaceResponses, unknown, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pms/workspace',
+            ...options
+        });
+    }
+    
+    /**
+     * Create Campus
+     */
+    public static createCampus<ThrowOnError extends boolean = true>(options: Options<pmsCreateCampusData, ThrowOnError>) {
+        return (options.client ?? client).post<pmsCreateCampusResponses, pmsCreateCampusErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pms/campuses',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Create Designation
+     */
+    public static createDesignation<ThrowOnError extends boolean = true>(options: Options<pmsCreateDesignationData, ThrowOnError>) {
+        return (options.client ?? client).post<pmsCreateDesignationResponses, pmsCreateDesignationErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pms/designations',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Create Employee
+     */
+    public static createEmployee<ThrowOnError extends boolean = true>(options: Options<pmsCreateEmployeeData, ThrowOnError>) {
+        return (options.client ?? client).post<pmsCreateEmployeeResponses, pmsCreateEmployeeErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pms/employees',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Create Kra
+     */
+    public static createKra<ThrowOnError extends boolean = true>(options: Options<pmsCreateKraData, ThrowOnError>) {
+        return (options.client ?? client).post<pmsCreateKraResponses, pmsCreateKraErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pms/kras',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Create Kpi
+     */
+    public static createKpi<ThrowOnError extends boolean = true>(options: Options<pmsCreateKpiData, ThrowOnError>) {
+        return (options.client ?? client).post<pmsCreateKpiResponses, pmsCreateKpiErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pms/kpis',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Create Template
+     */
+    public static createTemplate<ThrowOnError extends boolean = true>(options: Options<pmsCreateTemplateData, ThrowOnError>) {
+        return (options.client ?? client).post<pmsCreateTemplateResponses, pmsCreateTemplateErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pms/templates',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Publish Template
+     */
+    public static publishTemplate<ThrowOnError extends boolean = true>(options: Options<pmsPublishTemplateData, ThrowOnError>) {
+        return (options.client ?? client).post<pmsPublishTemplateResponses, pmsPublishTemplateErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pms/templates/{template_id}/publish',
+            ...options
+        });
+    }
+    
+    /**
+     * Create Cycle
+     */
+    public static createCycle<ThrowOnError extends boolean = true>(options: Options<pmsCreateCycleData, ThrowOnError>) {
+        return (options.client ?? client).post<pmsCreateCycleResponses, pmsCreateCycleErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pms/cycles',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Assign Goals
+     */
+    public static assignGoals<ThrowOnError extends boolean = true>(options: Options<pmsAssignGoalsData, ThrowOnError>) {
+        return (options.client ?? client).post<pmsAssignGoalsResponses, pmsAssignGoalsErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pms/cycles/{cycle_id}/assign',
+            ...options
+        });
+    }
+    
+    /**
+     * Submit Goals
+     */
+    public static submitGoals<ThrowOnError extends boolean = true>(options: Options<pmsSubmitGoalsData, ThrowOnError>) {
+        return (options.client ?? client).post<pmsSubmitGoalsResponses, pmsSubmitGoalsErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pms/cycles/{cycle_id}/submit-goals',
+            ...options
+        });
+    }
+}
 
 export class LoginService {
     /**

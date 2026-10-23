@@ -16,8 +16,13 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
 import { Route as LayoutAdminRouteImport } from './routes/_layout/admin'
+import { Route as LayoutCatalogRouteImport } from './routes/_layout/catalog'
+import { Route as LayoutCyclesRouteImport } from './routes/_layout/cycles'
+import { Route as LayoutGoalsRouteImport } from './routes/_layout/goals'
 import { Route as LayoutItemsRouteImport } from './routes/_layout/items'
+import { Route as LayoutOrganizationRouteImport } from './routes/_layout/organization'
 import { Route as LayoutSettingsRouteImport } from './routes/_layout/settings'
+import { Route as LayoutTemplatesRouteImport } from './routes/_layout/templates'
 
 const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
@@ -53,14 +58,39 @@ const LayoutAdminRoute = LayoutAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutCatalogRoute = LayoutCatalogRouteImport.update({
+  id: '/catalog',
+  path: '/catalog',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutCyclesRoute = LayoutCyclesRouteImport.update({
+  id: '/cycles',
+  path: '/cycles',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutGoalsRoute = LayoutGoalsRouteImport.update({
+  id: '/goals',
+  path: '/goals',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutItemsRoute = LayoutItemsRouteImport.update({
   id: '/items',
   path: '/items',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutOrganizationRoute = LayoutOrganizationRouteImport.update({
+  id: '/organization',
+  path: '/organization',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutSettingsRoute = LayoutSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutTemplatesRoute = LayoutTemplatesRouteImport.update({
+  id: '/templates',
+  path: '/templates',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -71,8 +101,13 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/admin': typeof LayoutAdminRoute
+  '/catalog': typeof LayoutCatalogRoute
+  '/cycles': typeof LayoutCyclesRoute
+  '/goals': typeof LayoutGoalsRoute
   '/items': typeof LayoutItemsRoute
+  '/organization': typeof LayoutOrganizationRoute
   '/settings': typeof LayoutSettingsRoute
+  '/templates': typeof LayoutTemplatesRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
@@ -80,8 +115,13 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/admin': typeof LayoutAdminRoute
+  '/catalog': typeof LayoutCatalogRoute
+  '/cycles': typeof LayoutCyclesRoute
+  '/goals': typeof LayoutGoalsRoute
   '/items': typeof LayoutItemsRoute
+  '/organization': typeof LayoutOrganizationRoute
   '/settings': typeof LayoutSettingsRoute
+  '/templates': typeof LayoutTemplatesRoute
   '/': typeof LayoutIndexRoute
 }
 export interface FileRoutesById {
@@ -92,8 +132,13 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/_layout/admin': typeof LayoutAdminRoute
+  '/_layout/catalog': typeof LayoutCatalogRoute
+  '/_layout/cycles': typeof LayoutCyclesRoute
+  '/_layout/goals': typeof LayoutGoalsRoute
   '/_layout/items': typeof LayoutItemsRoute
+  '/_layout/organization': typeof LayoutOrganizationRoute
   '/_layout/settings': typeof LayoutSettingsRoute
+  '/_layout/templates': typeof LayoutTemplatesRoute
   '/_layout/': typeof LayoutIndexRoute
 }
 export interface FileRouteTypes {
@@ -105,8 +150,13 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/admin'
+    | '/catalog'
+    | '/cycles'
+    | '/goals'
     | '/items'
+    | '/organization'
     | '/settings'
+    | '/templates'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
@@ -114,8 +164,13 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/admin'
+    | '/catalog'
+    | '/cycles'
+    | '/goals'
     | '/items'
+    | '/organization'
     | '/settings'
+    | '/templates'
     | '/'
   id:
     | '__root__'
@@ -125,8 +180,13 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/_layout/admin'
+    | '/_layout/catalog'
+    | '/_layout/cycles'
+    | '/_layout/goals'
     | '/_layout/items'
+    | '/_layout/organization'
     | '/_layout/settings'
+    | '/_layout/templates'
     | '/_layout/'
   fileRoutesById: FileRoutesById
 }
@@ -189,11 +249,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAdminRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/catalog': {
+      id: '/_layout/catalog'
+      path: '/catalog'
+      fullPath: '/catalog'
+      preLoaderRoute: typeof LayoutCatalogRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/cycles': {
+      id: '/_layout/cycles'
+      path: '/cycles'
+      fullPath: '/cycles'
+      preLoaderRoute: typeof LayoutCyclesRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/goals': {
+      id: '/_layout/goals'
+      path: '/goals'
+      fullPath: '/goals'
+      preLoaderRoute: typeof LayoutGoalsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/items': {
       id: '/_layout/items'
       path: '/items'
       fullPath: '/items'
       preLoaderRoute: typeof LayoutItemsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/organization': {
+      id: '/_layout/organization'
+      path: '/organization'
+      fullPath: '/organization'
+      preLoaderRoute: typeof LayoutOrganizationRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/settings': {
@@ -203,20 +291,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutSettingsRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/templates': {
+      id: '/_layout/templates'
+      path: '/templates'
+      fullPath: '/templates'
+      preLoaderRoute: typeof LayoutTemplatesRouteImport
+      parentRoute: typeof LayoutRoute
+    }
   }
 }
 
 interface LayoutRouteChildren {
   LayoutAdminRoute: typeof LayoutAdminRoute
+  LayoutCatalogRoute: typeof LayoutCatalogRoute
+  LayoutCyclesRoute: typeof LayoutCyclesRoute
+  LayoutGoalsRoute: typeof LayoutGoalsRoute
   LayoutItemsRoute: typeof LayoutItemsRoute
+  LayoutOrganizationRoute: typeof LayoutOrganizationRoute
   LayoutSettingsRoute: typeof LayoutSettingsRoute
+  LayoutTemplatesRoute: typeof LayoutTemplatesRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutAdminRoute: LayoutAdminRoute,
+  LayoutCatalogRoute: LayoutCatalogRoute,
+  LayoutCyclesRoute: LayoutCyclesRoute,
+  LayoutGoalsRoute: LayoutGoalsRoute,
   LayoutItemsRoute: LayoutItemsRoute,
+  LayoutOrganizationRoute: LayoutOrganizationRoute,
   LayoutSettingsRoute: LayoutSettingsRoute,
+  LayoutTemplatesRoute: LayoutTemplatesRoute,
   LayoutIndexRoute: LayoutIndexRoute,
 }
 

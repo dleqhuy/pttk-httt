@@ -1,60 +1,39 @@
 import { Link } from "@tanstack/react-router"
-
-import { useTheme } from "@/components/theme-provider"
+import { Layers } from "lucide-react"
 import { cn } from "@/lib/utils"
-import icon from "/assets/images/fastapi-icon.svg"
-import iconLight from "/assets/images/fastapi-icon-light.svg"
-import logo from "/assets/images/fastapi-logo.svg"
-import logoLight from "/assets/images/fastapi-logo-light.svg"
 
 interface LogoProps {
   variant?: "full" | "icon" | "responsive"
   className?: string
   asLink?: boolean
 }
-
 export function Logo({
   variant = "full",
   className,
   asLink = true,
 }: LogoProps) {
-  const { resolvedTheme } = useTheme()
-  const isDark = resolvedTheme === "dark"
-
-  const fullLogo = isDark ? logoLight : logo
-  const iconLogo = isDark ? iconLight : icon
-
-  const content =
-    variant === "responsive" ? (
-      <>
-        <img
-          src={fullLogo}
-          alt="FastAPI"
-          className={cn(
-            "h-6 w-auto group-data-[collapsible=icon]:hidden",
-            className,
-          )}
-        />
-        <img
-          src={iconLogo}
-          alt="FastAPI"
-          className={cn(
-            "size-5 hidden group-data-[collapsible=icon]:block",
-            className,
-          )}
-        />
-      </>
-    ) : (
-      <img
-        src={variant === "full" ? fullLogo : iconLogo}
-        alt="FastAPI"
-        className={cn(variant === "full" ? "h-6 w-auto" : "size-5", className)}
-      />
-    )
-
-  if (!asLink) {
-    return content
-  }
-
-  return <Link to="/">{content}</Link>
+  const content = (
+    <span className={cn("inline-flex items-center gap-3", className)}>
+      <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+        <Layers className="size-5" />
+      </span>
+      {variant !== "icon" && (
+        <span
+          className={
+            variant === "responsive"
+              ? "group-data-[collapsible=icon]:hidden"
+              : ""
+          }
+        >
+          <strong className="block text-xl tracking-tight">
+            PMS<span className="text-primary">.</span>
+          </strong>
+          <span className="block text-[9px] uppercase tracking-[0.16em] text-muted-foreground">
+            Performance workspace
+          </span>
+        </span>
+      )}
+    </span>
+  )
+  return asLink ? <Link to="/">{content}</Link> : content
 }

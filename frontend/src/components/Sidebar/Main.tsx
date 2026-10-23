@@ -1,5 +1,6 @@
 import { Link as RouterLink, useRouterState } from "@tanstack/react-router"
 import type { LucideIcon } from "lucide-react"
+import { useEffect } from "react"
 
 import {
   SidebarGroup,
@@ -24,6 +25,10 @@ export function Main({ items }: MainProps) {
   const { isMobile, setOpenMobile } = useSidebar()
   const router = useRouterState()
   const currentPath = router.location.pathname
+
+  useEffect(() => {
+    if (currentPath) setOpenMobile(false)
+  }, [currentPath, setOpenMobile])
 
   const handleMenuClick = () => {
     if (isMobile) {

@@ -5,6 +5,36 @@ export type ClientOptions = {
 };
 
 /**
+ * AppraisalCycle
+ */
+export type AppraisalCycle = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Campus Id
+     */
+    campus_id: string;
+    /**
+     * Year
+     */
+    year: number;
+    /**
+     * Id
+     */
+    id?: string;
+    /**
+     * Status
+     */
+    status?: string;
+};
+
+/**
  * Body_login-login_access_token
  */
 export type Body_login_login_access_token = {
@@ -32,6 +62,182 @@ export type Body_login_login_access_token = {
      * Client Secret
      */
     client_secret?: string | null;
+};
+
+/**
+ * Campus
+ */
+export type Campus = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Id
+     */
+    id?: string;
+};
+
+/**
+ * CampusInput
+ */
+export type CampusInput = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+};
+
+/**
+ * CycleInput
+ */
+export type CycleInput = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Campus Id
+     */
+    campus_id: string;
+    /**
+     * Year
+     */
+    year: number;
+};
+
+/**
+ * Designation
+ */
+export type Designation = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Id
+     */
+    id?: string;
+};
+
+/**
+ * Employee
+ */
+export type Employee = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Full Name
+     */
+    full_name: string;
+    /**
+     * Email
+     */
+    email: string;
+    /**
+     * Campus Id
+     */
+    campus_id: string;
+    /**
+     * Designation Id
+     */
+    designation_id: string;
+    /**
+     * Manager Id
+     */
+    manager_id?: string | null;
+    /**
+     * User Id
+     */
+    user_id?: string | null;
+    role?: Role;
+    /**
+     * Id
+     */
+    id?: string;
+};
+
+/**
+ * EmployeeInput
+ */
+export type EmployeeInput = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Full Name
+     */
+    full_name: string;
+    /**
+     * Email
+     */
+    email: string;
+    /**
+     * Campus Id
+     */
+    campus_id: string;
+    /**
+     * Designation Id
+     */
+    designation_id: string;
+    /**
+     * Manager Id
+     */
+    manager_id?: string | null;
+    /**
+     * User Id
+     */
+    user_id?: string | null;
+    role?: Role;
+};
+
+/**
+ * GoalTemplate
+ */
+export type GoalTemplate = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Id
+     */
+    id?: string;
+    /**
+     * Designation Id
+     */
+    designation_id: string;
+    /**
+     * Rubric
+     */
+    rubric: string;
+    /**
+     * Status
+     */
+    status?: string;
 };
 
 /**
@@ -113,6 +319,118 @@ export type ItemsPublic = {
 };
 
 /**
+ * Kpi
+ */
+export type Kpi = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Description
+     */
+    description?: string;
+    /**
+     * Active
+     */
+    active?: boolean;
+    /**
+     * Kra Id
+     */
+    kra_id: string;
+    /**
+     * Unit
+     */
+    unit?: string;
+    /**
+     * Id
+     */
+    id?: string;
+};
+
+/**
+ * KpiInput
+ */
+export type KpiInput = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Description
+     */
+    description?: string;
+    /**
+     * Active
+     */
+    active?: boolean;
+    /**
+     * Kra Id
+     */
+    kra_id: string;
+    /**
+     * Unit
+     */
+    unit?: string;
+};
+
+/**
+ * Kra
+ */
+export type Kra = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Description
+     */
+    description?: string;
+    /**
+     * Active
+     */
+    active?: boolean;
+    /**
+     * Id
+     */
+    id?: string;
+};
+
+/**
+ * KraInput
+ */
+export type KraInput = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Description
+     */
+    description?: string;
+    /**
+     * Active
+     */
+    active?: boolean;
+};
+
+/**
  * Message
  */
 export type Message = {
@@ -156,6 +474,37 @@ export type PrivateUserCreate = {
      * Is Verified
      */
     is_verified?: boolean;
+};
+
+/**
+ * Role
+ */
+export type Role = 'corporate_hr' | 'campus_hr' | 'manager' | 'employee';
+
+/**
+ * TemplateInput
+ */
+export type TemplateInput = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Designation Id
+     */
+    designation_id: string;
+    /**
+     * Kpi Ids
+     */
+    kpi_ids: Array<string>;
+    /**
+     * Rubric
+     */
+    rubric: string;
 };
 
 /**
@@ -341,6 +690,299 @@ export type ValidationError = {
         [key: string]: unknown;
     };
 };
+
+export type pmsWorkspaceData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/pms/workspace';
+};
+
+export type pmsWorkspaceResponses = {
+    /**
+     * Response Pms-Workspace
+     *
+     * Successful Response
+     */
+    200: {
+        [key: string]: unknown;
+    };
+};
+
+export type pmsWorkspaceResponse = pmsWorkspaceResponses[keyof pmsWorkspaceResponses];
+
+export type pmsCreateCampusData = {
+    body: CampusInput;
+    path?: never;
+    query?: never;
+    url: '/api/v1/pms/campuses';
+};
+
+export type pmsCreateCampusErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pmsCreateCampusError = pmsCreateCampusErrors[keyof pmsCreateCampusErrors];
+
+export type pmsCreateCampusResponses = {
+    /**
+     * Successful Response
+     */
+    201: Campus;
+};
+
+export type pmsCreateCampusResponse = pmsCreateCampusResponses[keyof pmsCreateCampusResponses];
+
+export type pmsCreateDesignationData = {
+    body: CampusInput;
+    path?: never;
+    query?: never;
+    url: '/api/v1/pms/designations';
+};
+
+export type pmsCreateDesignationErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pmsCreateDesignationError = pmsCreateDesignationErrors[keyof pmsCreateDesignationErrors];
+
+export type pmsCreateDesignationResponses = {
+    /**
+     * Successful Response
+     */
+    201: Designation;
+};
+
+export type pmsCreateDesignationResponse = pmsCreateDesignationResponses[keyof pmsCreateDesignationResponses];
+
+export type pmsCreateEmployeeData = {
+    body: EmployeeInput;
+    path?: never;
+    query?: never;
+    url: '/api/v1/pms/employees';
+};
+
+export type pmsCreateEmployeeErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pmsCreateEmployeeError = pmsCreateEmployeeErrors[keyof pmsCreateEmployeeErrors];
+
+export type pmsCreateEmployeeResponses = {
+    /**
+     * Successful Response
+     */
+    201: Employee;
+};
+
+export type pmsCreateEmployeeResponse = pmsCreateEmployeeResponses[keyof pmsCreateEmployeeResponses];
+
+export type pmsCreateKraData = {
+    body: KraInput;
+    path?: never;
+    query?: never;
+    url: '/api/v1/pms/kras';
+};
+
+export type pmsCreateKraErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pmsCreateKraError = pmsCreateKraErrors[keyof pmsCreateKraErrors];
+
+export type pmsCreateKraResponses = {
+    /**
+     * Successful Response
+     */
+    201: Kra;
+};
+
+export type pmsCreateKraResponse = pmsCreateKraResponses[keyof pmsCreateKraResponses];
+
+export type pmsCreateKpiData = {
+    body: KpiInput;
+    path?: never;
+    query?: never;
+    url: '/api/v1/pms/kpis';
+};
+
+export type pmsCreateKpiErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pmsCreateKpiError = pmsCreateKpiErrors[keyof pmsCreateKpiErrors];
+
+export type pmsCreateKpiResponses = {
+    /**
+     * Successful Response
+     */
+    201: Kpi;
+};
+
+export type pmsCreateKpiResponse = pmsCreateKpiResponses[keyof pmsCreateKpiResponses];
+
+export type pmsCreateTemplateData = {
+    body: TemplateInput;
+    path?: never;
+    query?: never;
+    url: '/api/v1/pms/templates';
+};
+
+export type pmsCreateTemplateErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pmsCreateTemplateError = pmsCreateTemplateErrors[keyof pmsCreateTemplateErrors];
+
+export type pmsCreateTemplateResponses = {
+    /**
+     * Successful Response
+     */
+    201: GoalTemplate;
+};
+
+export type pmsCreateTemplateResponse = pmsCreateTemplateResponses[keyof pmsCreateTemplateResponses];
+
+export type pmsPublishTemplateData = {
+    body?: never;
+    path: {
+        /**
+         * Template Id
+         */
+        template_id: string;
+    };
+    query?: never;
+    url: '/api/v1/pms/templates/{template_id}/publish';
+};
+
+export type pmsPublishTemplateErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pmsPublishTemplateError = pmsPublishTemplateErrors[keyof pmsPublishTemplateErrors];
+
+export type pmsPublishTemplateResponses = {
+    /**
+     * Successful Response
+     */
+    200: GoalTemplate;
+};
+
+export type pmsPublishTemplateResponse = pmsPublishTemplateResponses[keyof pmsPublishTemplateResponses];
+
+export type pmsCreateCycleData = {
+    body: CycleInput;
+    path?: never;
+    query?: never;
+    url: '/api/v1/pms/cycles';
+};
+
+export type pmsCreateCycleErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pmsCreateCycleError = pmsCreateCycleErrors[keyof pmsCreateCycleErrors];
+
+export type pmsCreateCycleResponses = {
+    /**
+     * Successful Response
+     */
+    201: AppraisalCycle;
+};
+
+export type pmsCreateCycleResponse = pmsCreateCycleResponses[keyof pmsCreateCycleResponses];
+
+export type pmsAssignGoalsData = {
+    body?: never;
+    path: {
+        /**
+         * Cycle Id
+         */
+        cycle_id: string;
+    };
+    query?: never;
+    url: '/api/v1/pms/cycles/{cycle_id}/assign';
+};
+
+export type pmsAssignGoalsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pmsAssignGoalsError = pmsAssignGoalsErrors[keyof pmsAssignGoalsErrors];
+
+export type pmsAssignGoalsResponses = {
+    /**
+     * Response Pms-Assign Goals
+     *
+     * Successful Response
+     */
+    200: {
+        [key: string]: unknown;
+    };
+};
+
+export type pmsAssignGoalsResponse = pmsAssignGoalsResponses[keyof pmsAssignGoalsResponses];
+
+export type pmsSubmitGoalsData = {
+    body?: never;
+    path: {
+        /**
+         * Cycle Id
+         */
+        cycle_id: string;
+    };
+    query?: never;
+    url: '/api/v1/pms/cycles/{cycle_id}/submit-goals';
+};
+
+export type pmsSubmitGoalsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pmsSubmitGoalsError = pmsSubmitGoalsErrors[keyof pmsSubmitGoalsErrors];
+
+export type pmsSubmitGoalsResponses = {
+    /**
+     * Response Pms-Submit Goals
+     *
+     * Successful Response
+     */
+    200: {
+        [key: string]: string;
+    };
+};
+
+export type pmsSubmitGoalsResponse = pmsSubmitGoalsResponses[keyof pmsSubmitGoalsResponses];
 
 export type loginLoginAccessTokenData = {
     body: Body_login_login_access_token;
