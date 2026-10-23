@@ -1,10 +1,28 @@
+from sqlite3 import Connection
+
+from sqlalchemy.pool import ConnectionPoolEntry
 from sqlmodel import Session, create_engine, select
 
 from app import crud
 from app.core.config import settings
 from app.models import User, UserCreate
 
-engine = create_engine(str(settings.DATABASE_URL), pool_pre_ping=True)
+engine = create_engine(
+    settings.DATABASE_URL,
+    pool_pre_ping=True,
+    connect_args={"check_same_thread": False}
+    if settings.DATABASE_URL.startswith("sqlite://")
+    else {},
+)
+
+if settings.DATABASE_URL.startswith("sqlite://"):
+    from sqlalchemy import event
+
+    @event.listens_for(engine, "connect")
+    def enable_sqlite_foreign_keys(
+        connection: Connection, _record: ConnectionPoolEntry
+    ) -> None:
+        connection.execute("PRAGMA foreign_keys=ON")
 
 
 # make sure all SQLModel models are imported (app.models) before initializing DB

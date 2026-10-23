@@ -24,6 +24,7 @@ from app.models import (
     UserUpdate,
     UserUpdateMe,
 )
+from app.pms.models import Employee
 from app.utils import generate_new_account_email, send_email
 
 router = APIRouter(prefix="/users", tags=["users"])
@@ -138,6 +139,12 @@ def delete_user_me(session: SessionDep, current_user: CurrentUser) -> Any:
         raise HTTPException(
             status_code=403, detail="Super users are not allowed to delete themselves"
         )
+    if session.exec(
+        select(Employee).where(Employee.user_id == current_user.id)
+    ).first():
+        raise HTTPException(
+            409, "Tài khoản đã liên kết nhân sự; hãy vô hiệu hóa thay vì xóa"
+        )
     session.delete(current_user)
     session.commit()
     return Message(message="User deleted successfully")
@@ -224,6 +231,10 @@ def delete_user(
     if user == current_user:
         raise HTTPException(
             status_code=403, detail="Super users are not allowed to delete themselves"
+        )
+    if session.exec(select(Employee).where(Employee.user_id == user_id)).first():
+        raise HTTPException(
+            409, "Tài khoản đã liên kết nhân sự; hãy vô hiệu hóa thay vì xóa"
         )
     statement = delete(Item).where(col(Item.owner_id) == user_id)
     session.exec(statement)

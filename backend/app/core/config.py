@@ -28,12 +28,15 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str
     SENTRY_DSN: HttpUrl | None = None
-    DATABASE_URL: PostgresDsn
+    DATABASE_URL: str
 
     @field_validator("DATABASE_URL", mode="before")
     @classmethod
     def _use_psycopg_driver(cls, value: str | PostgresDsn) -> str:
         database_url = str(value)
+        if database_url.startswith("sqlite://"):
+            return database_url
+        PostgresDsn(database_url)
         for scheme in ("postgres://", "postgresql://"):
             if database_url.startswith(scheme):
                 return database_url.replace(scheme, "postgresql+psycopg://", 1)
@@ -64,6 +67,7 @@ class Settings(BaseSettings):
     EMAIL_TEST_USER: EmailStr = "test@example.com"
     FIRST_SUPERUSER: EmailStr
     FIRST_SUPERUSER_PASSWORD: str
+    PMS_DEMO_PASSWORD: str | None = None
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
         if value == "changethis":
@@ -79,7 +83,11 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def _enforce_non_default_secrets(self) -> Self:
         self._check_default_secret("SECRET_KEY", self.SECRET_KEY)
-        for host in self.DATABASE_URL.hosts():
+        for host in (
+            []
+            if self.DATABASE_URL.startswith("sqlite://")
+            else PostgresDsn(self.DATABASE_URL).hosts()
+        ):
             self._check_default_secret("DATABASE_URL password", host["password"])
         self._check_default_secret(
             "FIRST_SUPERUSER_PASSWORD", self.FIRST_SUPERUSER_PASSWORD

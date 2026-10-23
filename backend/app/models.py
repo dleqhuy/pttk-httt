@@ -118,9 +118,23 @@ class Token(SQLModel):
 
 # Contents of JWT token
 class TokenPayload(SQLModel):
-    sub: str | None = None
+    sub: uuid.UUID | None = None
 
 
 class NewPassword(SQLModel):
     token: str
     new_password: str = Field(min_length=8, max_length=128)
+
+
+# Register PMS tables for Alembic and the local development database.
+from app.pms.models import (  # noqa: E402,F401
+    AppraisalCycle,
+    Campus,
+    Designation,
+    Employee,
+    Goal,
+    GoalTemplate,
+    Kpi,
+    Kra,
+    TemplateKpi,
+)
