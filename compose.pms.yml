@@ -1,0 +1,13 @@
+# Local PMS setup on PostgreSQL. Combine with compose.yml and compose.override.yml.
+services:
+  backend:
+    command:
+      - bash
+      - -c
+      - >-
+        alembic upgrade head &&
+        python -m app.initial_data &&
+        python -m app.pms.bootstrap --demo &&
+        fastapi run --host 0.0.0.0
+    environment:
+      PMS_DEMO_PASSWORD: ${PMS_DEMO_PASSWORD:-}

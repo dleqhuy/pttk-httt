@@ -1,6 +1,37 @@
-# PMS — Phân tích nghiệp vụ từ BPMN
+# PMS — Performance Management System
 
-Bộ tài liệu phân tích quy trình quản lý và đánh giá hiệu suất nhân sự, làm đầu vào để thiết kế FE, BE và cơ sở dữ liệu.
+Ứng dụng quản lý hiệu suất nhân sự dựa trên FastAPI Full Stack Template, kèm bộ phân tích nghiệp vụ từ BPMN. Bản nền tảng hiện có đăng nhập, dashboard, danh mục tổ chức/KRA/KPI, template, chu kỳ, phân bổ và xác nhận mục tiêu.
+
+## Chạy ứng dụng
+
+Yêu cầu: Python 3.14, uv, Bun. Chế độ local dùng SQLite; Docker/PostgreSQL là lựa chọn riêng.
+
+```bash
+bash scripts/setup.sh
+bash scripts/dev.sh
+```
+
+- Frontend: [localhost:5173](http://localhost:5173).
+- API và Swagger: [localhost:8000/docs](http://localhost:8000/docs).
+- Admin: `admin@example.com`, mật khẩu ở `FIRST_SUPERUSER_PASSWORD` trong `.env`.
+- Demo: `campus.hr@example.com`, `minhanh@example.com`, `hoangnam@example.com`; mật khẩu ở `PMS_DEMO_PASSWORD` trong `.env`.
+- `.env` và database local không được đưa vào Git; script setup sinh mật khẩu ngẫu nhiên và giữ nguyên cấu hình đã có.
+
+Đọc [hướng dẫn nền tảng FE/BE](docs/15-nen-tang-fe-be.md) để xem cấu trúc, API, luồng chạy thử, PostgreSQL và phạm vi đã triển khai. Xem [nguồn template](docs/template-upstream.md) để biết commit upstream và giấy phép.
+
+## Cấu trúc mã nguồn
+
+```text
+backend/app/pms/          # Model, API, phân quyền và bootstrap PMS
+backend/app/alembic/      # Migration PostgreSQL, gồm 9 bảng PMS
+backend/pms_tests/        # Kiểm thử PMS trên database tách biệt
+frontend/src/features/pms/ # Dashboard, danh mục, chu kỳ và mục tiêu
+frontend/src/routes/      # TanStack Router + các trang đăng nhập/tài khoản
+scripts/                 # Setup, chạy dev và sinh API client
+docs/                    # Phân tích BPMN và hướng dẫn triển khai
+```
+
+Đánh giá giữa/cuối năm, phê duyệt local, tính điểm, chuẩn hóa và notification/audit PMS chưa triển khai. Rubric hiện là mô tả dùng chung ở cấp template; chưa có thang điểm cấu trúc theo từng KPI. Các quyết định nghiệp vụ đang mở vẫn được liệt kê trong tài liệu 13.
 
 **Nguồn:** [PMS_Đồ án cuối kỳ_Final Ver.bpmn](<PMS_Đồ án cuối kỳ_Final Ver.bpmn>). Tên file trên đĩa sử dụng Unicode dạng tổ hợp; giữ nguyên file gốc để đối chiếu.
 
@@ -32,6 +63,7 @@ Corporate HR tạo thư viện KRA/KPI, template theo chức danh và rubric →
 | [12 — Trạng thái và quyền](docs/12-trang-thai-va-quyen.md) | Chuyển trạng thái, kiểm tra quyền, quy tắc bất biến và tình huống nghiệm thu |
 | [13 — Khoảng trống và kế hoạch FE/BE](docs/13-khoang-trong-va-ke-hoach.md) | Điểm chưa rõ của sơ đồ, các quyết định cần chốt, thứ tự phát triển |
 | [14 — Đối chiếu BPMN](docs/14-doi-chieu-bpmn.md) | Danh sách đủ task, gateway, flow, lane và annotation theo ID gốc |
+| [15 — Nền tảng FE/BE](docs/15-nen-tang-fe-be.md) | Hướng dẫn chạy, API, chức năng đã làm/chưa làm và kiểm thử |
 
 **Thứ tự đọc:** `00` → các module `01–10` → `11` và `12` → chốt các câu hỏi trong `13`. Dùng `14` để kiểm tra lại đường đi trong sơ đồ.
 
